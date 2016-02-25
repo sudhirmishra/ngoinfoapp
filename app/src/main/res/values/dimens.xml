@@ -9,8 +9,8 @@
 
     <dimen name="label_leftMargin">2dp</dimen>
     <dimen name="detail_leftMargin">6dp</dimen>
-    <dimen name="label_fontSize">26sp</dimen>
-    <dimen name="detail_fontSize">16dp</dimen>
+    <dimen name="label_fontSize">20sp</dimen>
+    <dimen name="detail_fontSize">14dp</dimen>
 
 
 </resources>
