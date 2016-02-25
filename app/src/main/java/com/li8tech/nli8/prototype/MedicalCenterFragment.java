@@ -2,6 +2,8 @@ package com.li8tech.nli8.prototype;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.li8tech.nli8.prototype.adapter.DoctorAdapter;
 import com.li8tech.nli8.prototype.pojo.Pojo.Doctor;
 
 import org.json.JSONArray;
@@ -36,6 +39,7 @@ public class MedicalCenterFragment extends Fragment {
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
     private String medcUrl = "http://pilock.pythonanywhere.com/api/doctors/";
+    RecyclerView rvDoctors;
 
     public MedicalCenterFragment() {
     }
@@ -47,7 +51,6 @@ public class MedicalCenterFragment extends Fragment {
 
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-
 
         GsonRequest<Doctor[]> gsonRequest = new GsonRequest<Doctor[]>(medcUrl,Doctor[].class,new HashMap<String,String>(),createNewAdapter(),handleException(), Request.Method.GET);
 
@@ -74,13 +77,26 @@ public class MedicalCenterFragment extends Fragment {
         return new Response.Listener<Doctor[]> () {
             @Override
             public void onResponse(Doctor[] response) {
-                //
 
-                for (int i = 0; i < response.length; i++) {
+                rvDoctors = (RecyclerView) getView().findViewById(R.id.rvDoctors);
+
+                // Create adapter passing in the sample user data
+                DoctorAdapter adapter = new DoctorAdapter(response);
+                // Attach the adapter to the recyclerview to populate items
+                rvDoctors.setAdapter(adapter);
+                // Set layout manager to position the items
+                rvDoctors.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                // Add separator
+                rvDoctors.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+                // That's all!
+                rvDoctors.setAdapter(adapter);
+
+                /*for (int i = 0; i < response.length; i++) {
                     Toast.makeText(MyApplication.getAppContext(),
                             "DOCTOR : " + response[i].name,
                             Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
 
 

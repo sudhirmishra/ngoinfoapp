@@ -9,5 +9,9 @@
     tools:context="com.li8tech.nli8.prototype.MedicalCenterFragment"
     tools:showIn="@layout/activity_medical_center">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDoctors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
