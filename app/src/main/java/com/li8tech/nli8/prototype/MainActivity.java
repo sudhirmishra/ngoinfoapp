@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,NoticeAdapter.ClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity
 
               adapter = new NoticeAdapter(response);
 
-             //   adapter.setClickListener();
                 // Attach the adapter to the recyclerview to populate items
                 recyclerView.setAdapter(adapter);
                 // Set layout manager to position the items
@@ -133,7 +132,12 @@ public class MainActivity extends AppCompatActivity
         };
     }
 
+    @Override
+    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
 
+//        adapter.setClickListener(this);
+        return super.onCreateView(parent, name, context, attrs);
+    }
 
     @Override
     public void onBackPressed() {
@@ -199,8 +203,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void itemclicked(View view, int position) {
 
-    }
 }
