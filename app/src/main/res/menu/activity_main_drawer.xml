@@ -15,9 +15,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="RAF" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:title="Akshay" />
+            android:id="@+id/nav_timings"
+            android:icon="@drawable/ic_announcement_black_24dp"
+            android:title="Timings" />
 
         <item
             android:id="@+id/nav_manage2"

@@ -132,5 +132,18 @@ public class Pojo {
         public String poster;
     }
 
+    public class Place {
+
+        @SerializedName("id")
+        @Expose
+        public Integer id;
+        @SerializedName("name")
+        @Expose
+        public String name;
+        @SerializedName("timings")
+        @Expose
+        public String timings;
+
+    }
 
 }
