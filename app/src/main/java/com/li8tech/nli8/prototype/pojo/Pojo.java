@@ -1,15 +1,27 @@
 package com.li8tech.nli8.prototype.pojo;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 /**
  * Created by hduser on 25/2/16.
  */
 public class Pojo {
 
+    public static final String API_BASE_URL = "http://pilock.pythonanywhere.com/api/";
+
+    public static HashMap<String, String > timeTypeMap = new HashMap<String, String>(){{
+        put("07:00:00","Breakfast");
+        put("12:00:00","Lunch");
+        put("19:00:00","Dinner");
+    }};
 
     /**
      * Created by hduser on 25/2/16.
@@ -205,7 +217,9 @@ public class Pojo {
         @SerializedName("venue")
         @Expose
         public String venue;
-
+        @SerializedName("poster")
+        @Expose
+        public String poster;
     }
 
 

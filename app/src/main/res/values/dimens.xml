@@ -6,4 +6,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="label_leftMargin">2dp</dimen>
+    <dimen name="detail_leftMargin">6dp</dimen>
+    <dimen name="label_fontSize">26sp</dimen>
+    <dimen name="detail_fontSize">16dp</dimen>
+
+
 </resources>
