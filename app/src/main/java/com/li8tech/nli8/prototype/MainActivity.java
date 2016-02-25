@@ -14,17 +14,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.li8tech.nli8.prototype.pojo.Pojo;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String url =  "http://pilock.pythonanywhere.com/api/notice/";
+    private VolleySingleton volleySingleton;
+    private RequestQueue requestQueue;
+    private ImageLoader imageLoader;
+
+    private String noticeUrl =  "http://pilock.pythonanywhere.com/api/notice/";
     private TextView mTextView ;
     private RecyclerView recyclerView;
     @Override
@@ -53,6 +62,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -62,24 +73,43 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response);
-                    }
-                }, new Response.ErrorListener() {
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+
+        GsonRequest<Pojo.Notice[]> gsonRequest = new GsonRequest<Pojo.Notice[]>(noticeUrl,Pojo.Notice[].class,new HashMap<String,String>(),createNewAdapter(),handleException(), Request.Method.GET);
+
+        requestQueue.add(gsonRequest);
+
+    }
+
+    private Response.Listener<Pojo.Notice[]> createNewAdapter() {
+        return new Response.Listener<Pojo.Notice[]> () {
+            @Override
+            public void onResponse(Pojo.Notice[] response) {
+                //
+
+                for (int i = 0; i < response.length; i++) {
+                    Toast.makeText(MyApplication.getAppContext(),
+                            "NOTICES : " + response[i].title,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        };
+    }
+
+    private Response.ErrorListener handleException() {
+        return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
+                System.out.print(error.getStackTrace());
             }
-        });
-// Add the request to the RequestQueue.
-         requestQueue.add(stringRequest);
+        };
     }
+
+
 
     @Override
     public void onBackPressed() {
