@@ -1,6 +1,7 @@
 package com.li8tech.nli8.prototype.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
+import com.li8tech.nli8.prototype.DetailsActivity;
 import com.li8tech.nli8.prototype.R;
-import com.li8tech.nli8.prototype.pojo.Pojo;
+import com.li8tech.nli8.prototype.pojo.Notice;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,12 +22,12 @@ import java.util.List;
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHolder> {
 
     // Store a member variable for the contacts
-    private List<Pojo.Notice> notices;
+    private List<Notice> notices;
     private Context context;
     private LayoutInflater inflater;
 
     // Pass in the contact array into the constructor
-    public NoticeAdapter(Pojo.Notice[] notices) {
+    public NoticeAdapter(Notice[] notices) {
         this.notices = Arrays.asList(notices);
     }
     @Override
@@ -48,7 +49,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         // Get the data model based on position
-        Pojo.Notice notice= notices.get(position);
+        Notice notice= notices.get(position);
 
         // Set item views based on the data model
         TextView textViewTitle = holder.noticeTitleTv;
@@ -89,8 +90,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
 
         @Override
         public void onClick(View v) {
+            Intent intent = new  Intent(context, DetailsActivity.class);
+            /*intent.putExtra("locKey",getLayoutPosition());*/
+            intent.putExtra("notice",notices.get(getLayoutPosition()));
+            context.startActivity(intent);
 
-            Toast.makeText(context,"The Item Clicked is: "+getPosition(),Toast.LENGTH_SHORT).show();
+
+
+            Toast.makeText(context,""+getLayoutPosition(),Toast.LENGTH_SHORT).show();
         }
     }
 

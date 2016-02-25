@@ -17,20 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.li8tech.nli8.prototype.adapter.DoctorAdapter;
 import com.li8tech.nli8.prototype.adapters.NoticeAdapter;
-import com.li8tech.nli8.prototype.pojo.Pojo;
+import com.li8tech.nli8.prototype.pojo.Notice;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private TextView mTextView ;
     private RecyclerView recyclerView;
     private NoticeAdapter adapter;
+    public Notice[] publicNotices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,19 +81,19 @@ public class MainActivity extends AppCompatActivity
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
-        GsonRequest<Pojo.Notice[]> gsonRequest = new GsonRequest<Pojo.Notice[]>(noticeUrl,Pojo.Notice[].class,new HashMap<String,String>(),createNewAdapter(),handleException(), Request.Method.GET);
+        GsonRequest<Notice[]> gsonRequest = new GsonRequest<Notice[]>(noticeUrl,Notice[].class,new HashMap<String,String>(),createNewAdapter(),handleException(), Request.Method.GET);
 
         requestQueue.add(gsonRequest);
 
     }
 
-    private Response.Listener<Pojo.Notice[]> createNewAdapter() {
-        return new Response.Listener<Pojo.Notice[]> () {
+    private Response.Listener<Notice[]> createNewAdapter() {
+        return new Response.Listener<Notice[]> () {
             @Override
-            public void onResponse(Pojo.Notice[] response) {
+            public void onResponse(Notice[] response) {
 
 
-
+                publicNotices = response;
               adapter = new NoticeAdapter(response);
 
                 // Attach the adapter to the recyclerview to populate items
