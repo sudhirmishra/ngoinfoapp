@@ -14,10 +14,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.li8tech.nli8.prototype.pojo.Pojo.Doctor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import static com.li8tech.nli8.prototype.Keys.*;
 
@@ -42,7 +48,11 @@ public class MedicalCenterFragment extends Fragment {
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
-        JsonArrayRequest request = new JsonArrayRequest(medcUrl, new Response.Listener<JSONArray>() {
+
+        GsonRequest<Doctor[]> gsonRequest = new GsonRequest<Doctor[]>(medcUrl,Doctor[].class,new HashMap<String,String>(),createNewAdapter(),handleException(), Request.Method.GET);
+
+        requestQueue.add(gsonRequest);
+        /*JsonArrayRequest request = new JsonArrayRequest(medcUrl, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 parseJSONResponce(response);
@@ -57,7 +67,33 @@ public class MedicalCenterFragment extends Fragment {
 
         );
 
-        requestQueue.add(request);
+        requestQueue.add(request);*/
+    }
+
+    private Response.Listener<Doctor[]> createNewAdapter() {
+        return new Response.Listener<Doctor[]> () {
+            @Override
+            public void onResponse(Doctor[] response) {
+                //
+
+                for (int i = 0; i < response.length; i++) {
+                    Toast.makeText(MyApplication.getAppContext(),
+                            "DOCTOR : " + response[i].name,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        };
+    }
+
+    private Response.ErrorListener handleException() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.print(error.getStackTrace());
+            }
+        };
     }
 
     private void parseJSONResponce(JSONArray response) {
