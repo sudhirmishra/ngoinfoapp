@@ -5,13 +5,13 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_local_dining_black_24dp"
-            android:title="Mess Menu" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_restaurant_menu_black_24dp"
             android:title="ANC Menu" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_mess_menu"
+            android:icon="@drawable/ic_restaurant_menu_black_24dp"
+            android:title="Mess Menu" />
+        <item
+            android:id="@+id/nav_raf"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="RAF" />
         <item

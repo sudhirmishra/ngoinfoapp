@@ -182,12 +182,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_mess_menu) {
+            Intent intent = new Intent(MainActivity.this, MessMenuActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_raf) {
+            Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_mess_menu) {
+            Intent intent = new Intent(MainActivity.this, MessMenuActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

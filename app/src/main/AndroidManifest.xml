@@ -40,6 +40,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MovieActivity"
+            android:label="@string/title_activity_RAF"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.li8tech.nli8.prototype.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MessMenuActivity"
+            android:label="@string/title_activity_messmenu"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.li8tech.nli8.prototype.MainActivity" />
+
+        </activity>
     </application>
 
 </manifest>

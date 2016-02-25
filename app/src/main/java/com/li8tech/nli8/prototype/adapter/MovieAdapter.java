@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.li8tech.nli8.prototype.R;
+import com.li8tech.nli8.prototype.VolleySingleton;
+import com.li8tech.nli8.prototype.pojo.Pojo;
 import com.li8tech.nli8.prototype.pojo.Pojo.Doctor;
 
 import java.util.Arrays;
@@ -17,7 +20,7 @@ import java.util.List;
 /**
  * Created by hduser on 25/2/16.
  */
-public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
 
     // Provide a direct reference to each of the views within a data item
@@ -25,8 +28,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView doctorNameTextView;
-        public TextView availabilityTextView;
+        public TextView movieName;
+        public NetworkImageView moviePoster;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -35,27 +38,27 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            doctorNameTextView = (TextView) itemView.findViewById(R.id.doctor);
-            availabilityTextView = (TextView) itemView.findViewById(R.id.availability);
+            movieName = (TextView) itemView.findViewById(R.id.movieName);
+            moviePoster = (NetworkImageView) itemView.findViewById(R.id.moviePoster);
         }
     }
 
     // Store a member variable for the contacts
-    private List<Doctor> doctors;
+    private List<Pojo.Movie> movies;
 
     // Pass in the contact array into the constructor
-    public DoctorAdapter(Doctor[] doctors) {
-        this.doctors = Arrays.asList(doctors);
+    public MovieAdapter(Pojo.Movie[] movies) {
+        this.movies= Arrays.asList(movies);
     }
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public DoctorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.medical_center_row, parent, false);
+        View contactView = inflater.inflate(R.layout.movie_row, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -64,22 +67,22 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(DoctorAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(MovieAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Doctor doctor = doctors.get(position);
+        Pojo.Movie movie = movies.get(position);
 
         // Set item views based on the data model
-        TextView textView = viewHolder.doctorNameTextView;
-        textView.setText(doctor.name);
+        TextView textView = viewHolder.movieName;
+        textView.setText(movie.name);
 
-        TextView textView1 = viewHolder.availabilityTextView;
-        textView1.setText(doctor.availability);
+        NetworkImageView imageView = viewHolder.moviePoster;
+        imageView.setImageUrl(movie.poster, VolleySingleton.getInstance().getImageLoader());
 
     }
 
     // Return the total count of items
     @Override
     public int getItemCount() {
-        return doctors.size();
+        return movies.size();
     }
 }

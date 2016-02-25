@@ -5,11 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.li8tech.nli8.prototype.R;
-import com.li8tech.nli8.prototype.pojo.Pojo.Doctor;
+import com.li8tech.nli8.prototype.VolleySingleton;
+import com.li8tech.nli8.prototype.pojo.Pojo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by hduser on 25/2/16.
  */
-public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
+public class MessMenuAdapter extends RecyclerView.Adapter<MessMenuAdapter.ViewHolder> {
 
 
     // Provide a direct reference to each of the views within a data item
@@ -25,8 +26,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView doctorNameTextView;
-        public TextView availabilityTextView;
+        public TextView date;
+        public TextView time;
+        public TextView fooditems;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -35,27 +37,29 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            doctorNameTextView = (TextView) itemView.findViewById(R.id.doctor);
-            availabilityTextView = (TextView) itemView.findViewById(R.id.availability);
+            date = (TextView) itemView.findViewById(R.id.date);
+            time = (TextView) itemView.findViewById(R.id.time);
+            fooditems = (TextView) itemView.findViewById(R.id.fooditems);
+
         }
     }
 
     // Store a member variable for the contacts
-    private List<Doctor> doctors;
+    private List<Pojo.MessMenu> messMenus;
 
     // Pass in the contact array into the constructor
-    public DoctorAdapter(Doctor[] doctors) {
-        this.doctors = Arrays.asList(doctors);
+    public MessMenuAdapter(Pojo.MessMenu[] movies) {
+        this.messMenus = Arrays.asList(movies);
     }
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public DoctorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessMenuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.medical_center_row, parent, false);
+        View contactView = inflater.inflate(R.layout.mess_menu_row, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -64,22 +68,32 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(DoctorAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(MessMenuAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Doctor doctor = doctors.get(position);
+        Pojo.MessMenu messMenu = messMenus.get(position);
 
         // Set item views based on the data model
-        TextView textView = viewHolder.doctorNameTextView;
-        textView.setText(doctor.name);
+        viewHolder.date.setText(messMenu.date);
 
-        TextView textView1 = viewHolder.availabilityTextView;
-        textView1.setText(doctor.availability);
 
+        if(Pojo.timeTypeMap.containsKey(messMenu.time)){
+            viewHolder.time.setText(Pojo.timeTypeMap.get(messMenu.time));
+        }else{
+            viewHolder.time.setText("Default");
+        }
+
+
+        StringBuilder itemsString = new StringBuilder();
+        for(Pojo.Item item:messMenu.items){
+            itemsString.append(item.name);
+            itemsString.append(" ");
+        }
+        viewHolder.fooditems.setText(itemsString);
     }
 
     // Return the total count of items
     @Override
     public int getItemCount() {
-        return doctors.size();
+        return messMenus.size();
     }
 }
