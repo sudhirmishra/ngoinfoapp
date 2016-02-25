@@ -1,5 +1,6 @@
 package com.li8tech.nli8.prototype;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.li8tech.nli8.prototype.pojo.Category;
+import com.li8tech.nli8.prototype.pojo.Contact;
 import com.li8tech.nli8.prototype.pojo.Notice;
 
 /**
@@ -42,13 +45,31 @@ public class DetailsActivityFragment extends Fragment {
         bodyTV = (TextView)myInflatedView.findViewById(R.id.body_content);
         bodyTV.setText(notice.body);
         deptTV = (TextView)myInflatedView.findViewById(R.id.department_content);
-       // deptTV.setText(notice.);
+
+        StringBuilder category = new StringBuilder();
+
+        for(Category c:notice.category){
+            category.append(c.name);
+            category.append(" ");
+        }
+
+        StringBuilder con = new StringBuilder();
+
+        for(Contact c:notice.contact){
+            con.append(c.firstName);
+            con.append(" ");
+            con.append(c.lastName);
+            con.append(" : ");
+            con.append(c.email);
+
+        }
+        deptTV.setText(category);
         eventDateTV = (TextView)myInflatedView.findViewById(R.id.eventdate_content);
         eventDateTV.setText(notice.eventDate);
         venueTV = (TextView)myInflatedView.findViewById(R.id.venu_content);
         venueTV.setText(notice.venue);
         contactTV = (TextView)myInflatedView.findViewById(R.id.contact_content);
-        //contactTV.setText(notice.);
+        contactTV.setText(con);
         deadlineTV = (TextView)myInflatedView.findViewById(R.id.deadline_content);
         deadlineTV.setText(notice.deadline);
 
