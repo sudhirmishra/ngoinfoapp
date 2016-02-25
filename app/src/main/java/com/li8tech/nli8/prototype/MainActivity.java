@@ -1,5 +1,6 @@
 package com.li8tech.nli8.prototype;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,8 +9,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,13 +24,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.StringRequest;
+import com.li8tech.nli8.prototype.adapter.DoctorAdapter;
+import com.li8tech.nli8.prototype.adapters.NoticeAdapter;
 import com.li8tech.nli8.prototype.pojo.Pojo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,NoticeAdapter.ClickListener {
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private String noticeUrl =  "http://pilock.pythonanywhere.com/api/notice/";
     private TextView mTextView ;
     private RecyclerView recyclerView;
+    private NoticeAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mTextView = (TextView)findViewById(R.id.mainTextView);
-
+        recyclerView =  (RecyclerView)findViewById(R.id.noticesList);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
@@ -87,13 +94,28 @@ public class MainActivity extends AppCompatActivity
         return new Response.Listener<Pojo.Notice[]> () {
             @Override
             public void onResponse(Pojo.Notice[] response) {
-                //
 
-                for (int i = 0; i < response.length; i++) {
+
+
+              adapter = new NoticeAdapter(response);
+
+             //   adapter.setClickListener();
+                // Attach the adapter to the recyclerview to populate items
+                recyclerView.setAdapter(adapter);
+                // Set layout manager to position the items
+                recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+
+                // Add separator
+                recyclerView.addItemDecoration(new DividerItemDecoration(MyApplication.getAppContext(), DividerItemDecoration.VERTICAL_LIST));
+                // That's all!
+                recyclerView.setAdapter(adapter);
+
+               /*for (int i = 0; i < response.length; i++) {
+
                     Toast.makeText(MyApplication.getAppContext(),
                             "NOTICES : " + response[i].title,
-                            Toast.LENGTH_SHORT).show();
-                }
+                            Toast.LENGTH_SHORT).show();*/
+
             }
 
 
@@ -104,6 +126,8 @@ public class MainActivity extends AppCompatActivity
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                mTextView.setText("No internet found!!! try again");
                 System.out.print(error.getStackTrace());
             }
         };
@@ -143,6 +167,9 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -170,5 +197,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void itemclicked(View view, int position) {
+
     }
 }

@@ -9,14 +9,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.li8tech.nli8.prototype.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <TextView
         android:id="@+id/mainTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading..." />
+        android:padding="6dp"
+        android:textColor="#f00"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/noticesList"

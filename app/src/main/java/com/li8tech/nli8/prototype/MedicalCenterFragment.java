@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static com.li8tech.nli8.prototype.Keys.*;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -112,43 +111,7 @@ public class MedicalCenterFragment extends Fragment {
         };
     }
 
-    private void parseJSONResponce(JSONArray response) {
 
-        if(response == null || response.length() == 0){
-
-            return;
-        }
-
-        try {
-            StringBuilder data = new StringBuilder();
-            // Parsing json array response
-            // loop through each json object
-            for (int i = 0; i < response.length(); i++) {
-
-                JSONObject doc = (JSONObject) response.get(i);
-
-                String name = doc.getString(KEYS_DOC_NAME);
-                String avail = doc.getString(KEYS_DOC_AVAIL);
-                String specf = doc.getString(KEYS_DOC_SPECS);
-
-                data.append(name +"\n"+avail+"\n"+specf+"\n\n");
-
-                Toast.makeText(MyApplication.getAppContext(),
-                        "DOCTOR : "+data.toString(),
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(MyApplication.getAppContext(),
-                    "Error: " + e.getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
-
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
