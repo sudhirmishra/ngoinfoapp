@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.li8tech.nli8.prototype.MedicalCenterFragment"
-    tools:showIn="@layout/activity_medical_center">
+    tools:showIn="@layout/activity_details_info">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvDoctors"
