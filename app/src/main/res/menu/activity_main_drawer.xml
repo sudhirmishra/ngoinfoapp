@@ -1,65 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_local_dining_black_24dp"
-            android:title="ANC Menu" />
-        <item
-            android:id="@+id/nav_mess_menu"
-            android:icon="@drawable/ic_restaurant_menu_black_24dp"
-            android:title="Mess Menu" />
-        <item
-            android:id="@+id/nav_raf"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="RAF" />
-        <item
-            android:id="@+id/nav_timings"
-            android:icon="@drawable/ic_announcement_black_24dp"
-            android:title="Timings" />
-
-        <item
-            android:id="@+id/nav_manage2"
-            android:icon="@drawable/ic_local_hospital_black_24dp"
-            android:title="Medical Centre" />
-
-    </group>
-
-    <item android:title="Clubs and Associations">
+    <item android:title="States">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_code_black_24dp"
-                android:title="CSA" />
+                android:id="@+id/nav_state_1"
+                android:icon="@drawable/ic_view_comfy_black_24dp"
+                android:title="Rajasthan" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="DVM" />
+                android:id="@+id/nav_state_2"
+                android:icon="@drawable/ic_view_comfy_black_24dp"
+                android:title="Uttar Pradesh" />
+            <item
+                android:id="@+id/nav_state_3"
+                android:icon="@drawable/ic_view_comfy_black_24dp"
+                android:title="Madhya Pradesh" />
         </menu>
     </item>
-
-    <item android:title="Departments">
-    <menu>
-        <item
-            android:id="@+id/nav_share2"
-            android:icon="@drawable/ic_view_comfy_black_24dp"
-            android:title="CSIS" />
-        <item
-            android:id="@+id/nav_send2"
-            android:icon="@drawable/ic_view_comfy_black_24dp"
-            android:title="Civil" />
-    </menu>
-</item>
-
-    <item android:title="Events">
+    <item android:title="Sectors">
         <menu>
             <item
-                android:id="@+id/nav_share3"
-                android:icon="@drawable/ic_announcement_black_24dp"
-                android:title="APOGEE" />
-
+                android:id="@+id/nav_sector_4"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Animal Husbandry" />
+            <item
+                android:id="@+id/nav_sector_5"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Women's Development and Empowerment" />
+            <item
+                android:id="@+id/nav_sector_6"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Housing" />
         </menu>
     </item>
-
 </menu>

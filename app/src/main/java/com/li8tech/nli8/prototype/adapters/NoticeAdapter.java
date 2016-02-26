@@ -58,8 +58,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
         TextView textViewDept = holder.noticeDeptTv;
         textViewDept.setText(notice.venue);
 
-        TextView textViewDate = holder.noticeDeadlineTv;
-        textViewDate.setText(notice.eventDate);
+
 
     }
 
@@ -84,20 +83,16 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.MyViewHold
             itemView.setOnClickListener(this);
             noticeTitleTv= (TextView) itemView.findViewById(R.id.noticeTitle);
             noticeDeptTv = (TextView) itemView.findViewById(R.id.noticeSub);
-            noticeDeadlineTv = (TextView) itemView.findViewById(R.id.noticeDeadline);
         }
 
 
         @Override
         public void onClick(View v) {
             Intent intent = new  Intent(context, DetailsActivity.class);
-            /*intent.putExtra("locKey",getLayoutPosition());*/
+
             intent.putExtra("notice",notices.get(getLayoutPosition()));
             context.startActivity(intent);
 
-
-
-            Toast.makeText(context,""+getLayoutPosition(),Toast.LENGTH_SHORT).show();
         }
     }
 

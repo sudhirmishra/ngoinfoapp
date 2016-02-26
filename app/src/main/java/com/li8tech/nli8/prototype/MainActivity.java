@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,38 +36,26 @@ public class MainActivity extends AppCompatActivity
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
 
-    private String noticeUrl =  "http://pilock.pythonanywhere.com/api/notice/";
+    private String noticeUrl =  "http://naveen2894.pythonanywhere.com/api/notice/";
     private TextView mTextView ;
     private RecyclerView recyclerView;
     private NoticeAdapter adapter;
     public Notice[] publicNotices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(getIntent().hasExtra("id")){
+            noticeUrl = noticeUrl + getIntent().getExtras().getString("id","");
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mTextView = (TextView)findViewById(R.id.mainTextView);
         recyclerView =  (RecyclerView)findViewById(R.id.noticesList);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-              //          .setAction("Action", null).show();
-
-                Intent intent = new Intent(MainActivity.this, DetailInfoActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,6 +74,7 @@ public class MainActivity extends AppCompatActivity
 
         requestQueue.add(gsonRequest);
 
+
     }
 
     private Response.Listener<Notice[]> createNewAdapter() {
@@ -92,9 +82,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onResponse(Notice[] response) {
 
-
+                if(response.length == 0){
+                    Toast.makeText(MyApplication.getAppContext(), R.string.no_data_found, Toast.LENGTH_LONG).show();
+                }
                 publicNotices = response;
-              adapter = new NoticeAdapter(response);
+                adapter = new NoticeAdapter(response);
 
                 // Attach the adapter to the recyclerview to populate items
                 recyclerView.setAdapter(adapter);
@@ -106,11 +98,7 @@ public class MainActivity extends AppCompatActivity
                 // That's all!
                 recyclerView.setAdapter(adapter);
 
-               /*for (int i = 0; i < response.length; i++) {
 
-                    Toast.makeText(MyApplication.getAppContext(),
-                            "NOTICES : " + response[i].title,
-                            Toast.LENGTH_SHORT).show();*/
 
             }
 
@@ -177,28 +165,35 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_manage2) {
-
-            Intent intent = new Intent(MainActivity.this, DetailInfoActivity.class);
+        if (id == R.id.nav_state_1) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=1");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
-            // Handle the camera action
-        } else if (id == R.id.nav_mess_menu) {
-            Intent intent = new Intent(MainActivity.this, MessMenuActivity.class);
+        } else if (id == R.id.nav_state_2) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=2");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
-        } else if (id == R.id.nav_raf) {
-            Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+        } else if (id == R.id.nav_state_3) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=3");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        } else if (id == R.id.nav_mess_menu) {
-            Intent intent = new Intent(MainActivity.this, MessMenuActivity.class);
+        }else if (id == R.id.nav_sector_4) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=4");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if(id == R.id.nav_timings){
-            Intent intent = new Intent(MainActivity.this,PlacesInfoActivity.class);
+        } else if (id == R.id.nav_sector_5) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=5");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        } else if (id == R.id.nav_sector_6) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("id","?category=6");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

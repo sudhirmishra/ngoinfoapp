@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.li8tech.nli8.prototype.pojo.Pojo.Doctor;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
