@@ -1,9 +1,8 @@
-package com.li8tech.nli8.prototype;
+package co.sudhirmishra.ngoapp;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,8 +23,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.li8tech.nli8.prototype.adapters.NoticeAdapter;
-import com.li8tech.nli8.prototype.pojo.Notice;
+
+import co.sudhirmishra.ngoapp.adapters.NoticeAdapter;
+import co.sudhirmishra.ngoapp.pojo.Notice;
 
 import java.util.HashMap;
 

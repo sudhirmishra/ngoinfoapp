@@ -1,4 +1,4 @@
-package com.li8tech.nli8.prototype;
+package co.sudhirmishra.ngoapp;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

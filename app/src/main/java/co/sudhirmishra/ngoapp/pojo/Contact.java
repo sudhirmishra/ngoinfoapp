@@ -1,4 +1,4 @@
-package com.li8tech.nli8.prototype.pojo;
+package co.sudhirmishra.ngoapp.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

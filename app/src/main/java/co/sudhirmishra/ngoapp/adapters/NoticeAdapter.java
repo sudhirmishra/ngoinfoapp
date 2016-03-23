@@ -1,4 +1,4 @@
-package com.li8tech.nli8.prototype.adapters;
+package co.sudhirmishra.ngoapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.li8tech.nli8.prototype.DetailsActivity;
-import com.li8tech.nli8.prototype.R;
-import com.li8tech.nli8.prototype.pojo.Notice;
+import co.sudhirmishra.ngoapp.DetailsActivity;
+import co.sudhirmishra.ngoapp.R;
+import co.sudhirmishra.ngoapp.pojo.Notice;
 
 import java.util.Arrays;
 import java.util.List;

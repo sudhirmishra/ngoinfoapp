@@ -1,6 +1,5 @@
-package com.li8tech.nli8.prototype;
+package co.sudhirmishra.ngoapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.li8tech.nli8.prototype.pojo.Category;
-import com.li8tech.nli8.prototype.pojo.Contact;
-import com.li8tech.nli8.prototype.pojo.Notice;
+
+import co.sudhirmishra.ngoapp.pojo.Category;
+import co.sudhirmishra.ngoapp.pojo.Contact;
+import co.sudhirmishra.ngoapp.pojo.Notice;
 
 /**
  * A placeholder fragment containing a simple view.
